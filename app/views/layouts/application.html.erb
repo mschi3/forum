@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Forum</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <!-- current_user is a method defined by devise to help us check if a user has signed in or not. -->
+  <!-- Add below links: -->
+  <% if current_user %>
+    <%= link_to('Log Out', destroy_user_session_path, :method => :delete) %> |
+    <%= link_to('Change Password', edit_user_registration_path) %>
+  <% else %>
+    <%= link_to('Sign Up', new_user_registration_path) %> |
+    <%= link_to('Sign In', new_user_session_path) %>
+  <% end %>
+  		<p class="notice"><%= notice %></p>
+  		<p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
+</html>
