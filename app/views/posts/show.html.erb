@@ -7,4 +7,15 @@
 
 <%= link_to "Edit", edit_post_path(@post) %>
 <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure you want to do this?"} %>
+
+<h2>
+	<p>Comments</p>
+</h2>
+
+<%= render @post.comments %>
+<hr>
+
+<h3>Reply to topic</h3>
+<%= render "comments/form" %>
+
 <p><%= link_to 'Back to index', :controller => 'posts', :action => 'index' %></p>
