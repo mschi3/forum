@@ -1,0 +1,9 @@
+<%= form_for @post do |f| %>
+  <%= f.text_field :title %>
+  <br>
+  <%= f.text_area :post %>
+  <br>
+  <%= f.submit %>
+<% end %>
+
+<p><%= link_to 'Back to index', :controller => 'posts', :action => 'index' %></p>
