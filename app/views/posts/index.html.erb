@@ -1,5 +1,7 @@
 <h1>Home Page!</h1>
 
+<p><%= link_to 'Create new Post', :controller => 'posts', :action => 'new' %></p>
+
 <% @posts.each do |post| %>
   <div>
     <h2>
