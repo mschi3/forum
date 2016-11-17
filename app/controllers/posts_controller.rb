@@ -1,7 +1,31 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!
+	
+	
+	def dashboard
+		@usercount=User.count(:all)
+		@postcount=Post.count(:all)
+		@commentcount=Comment.count(:all)
+  	end
+	
 	def index
 		@posts = Post.all
+		if params[:cat]
+			@category = Category.find_by_name(params[:cat])
+			@posts = @category.posts
+		else
+			@posts = Post.all
+		end
+
+		if params[:order]
+			if params[:order] == 'title'
+				sort_by = "#{params[:order]}"
+				@posts = Post.order(sort_by).all
+			else
+				sort_by = "#{params[:order]} DESC"
+				@posts = Post.order(sort_by).all
+			end
+		end
   end
 
   def new
@@ -10,7 +34,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.new(post_params)
-
+		@post.user = current_user
 		if @post.save
 			flash[:notice] = "Post was successfully created"
 			redirect_to @post
@@ -19,7 +43,7 @@ class PostsController < ApplicationController
 		end
 	end
   
-  def show
+  	def show
   	@post = Post.find(params[:id])
 	end
 

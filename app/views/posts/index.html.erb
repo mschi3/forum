@@ -1,11 +1,23 @@
 <h1>Home Page!</h1>
 
 <p><%= link_to 'Create new Post', :controller => 'posts', :action => 'new' %></p>
-
+<h2>There are <%=@posts.count%> posts</h2>
 <% @posts.each do |post| %>
   <div>
     <h2>
       <%= link_to post.title, post %>
     </h2>
   </div>
+  <%= link_to 'Dashboard', dashboard_post_path(post) %>
 <% end %>
+
+<p><%= link_to 'List all Categories', :controller => 'categories', :action => 'index' %></p>
+
+<p> Filter posts by category: </p>
+<% Category.all.each do |c| %>
+	<%= link_to c.name, posts_path(:cat=>c.name) %>
+<% end %>
+
+<p> Sort by:  
+<%= link_to 'Title', posts_path(:order => "title") %>
+<%= link_to 'Recently created', posts_path(:order => "created_at") %></p>

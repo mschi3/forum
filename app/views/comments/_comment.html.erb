@@ -1,5 +1,8 @@
   <h3><p><%= comment.comment %></p><h3>
   <h5><p>by: <%= comment.user.email %></p></h5>
+  <h5><p>by: <%= comment.updated_at %></p></h5>
 
+ <% if current_user == comment.user %>
   <%= link_to "Edit", edit_post_comment_path(comment.post, comment) %>
   <%= link_to "Delete", [comment.post, comment], method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>

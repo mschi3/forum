@@ -4,6 +4,14 @@ Rails.application.routes.draw do
 	root to: "posts#index"
 	resources :posts do
   	resources :comments
+  	member do
+ 		get :dashboard
+ 		end
   end
   resources :categories
+  #resource :userposts
+
+  resource :user
+
+  #get 'users/:id/posts' => 'users#posts', :as => :user_posts
 end

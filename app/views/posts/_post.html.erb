@@ -1,0 +1,6 @@
+<% object.each do |post| %>
+  <%= link_to post.title, post_path(post) %>
+  <% if post.categories.any? %>
+     <p>Categories: <%= render post.categories %></p>
+  <% end %>
+<% end %>
